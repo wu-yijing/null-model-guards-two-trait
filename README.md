@@ -17,15 +17,26 @@ Both traits pass through identical parsing and guard definitions, so the case st
 - PCOS: `definitions.csv`, `lead_associations_qc.csv`
 - T2D: `t2d_studies_qc.csv`, `t2d_lead_associations_qc.csv`
 
-The script reads these from local paths set in `dual_trait_guard_recompute.py` (constants `PCOS` and `T2D`). Adjust those two paths to your own copies of the CSVs before running.
+The unified script reads these from local paths set in `dual_trait_guard_recompute.py` (constants `PCOS` and `T2D`), which point at the `out/` directories produced by the two pipelines below. Adjust those two constants to your own output locations before running.
 
 ## Run
 
+The two trait pipelines fetch public GWAS Catalog v2 data and write the QC CSVs that the unified recomputation consumes. Run in order:
+
 ```bash
+# 1. Development case (PCOS): fetch + QC
+python pcos/fetch_p1a.py
+python pcos/analyse_p1a.py
+
+# 2. Replication case (T2D): fetch + QC
+python t2d/t2a_fetch.py
+python t2d/t2a_analyse_local.py
+
+# 3. Unified recomputation (identical guards on both traits)
 python dual_trait_guard_recompute.py
 ```
 
-Standard library only; no third-party dependencies. Output is written to `dual_trait_guards.json` and printed to stdout. Fixed GWS threshold 5e-8.
+Standard library only; no third-party dependencies and no credentials (public APIs). Each script uses paths relative to its own directory. The unified step writes `dual_trait_guards.json` and prints it to stdout. Fixed GWS threshold 5e-8. Record a stable commit before running so the analysis can be tied to a specific code version.
 
 ## Results at a glance
 
@@ -39,9 +50,12 @@ Standard library only; no third-party dependencies. Output is written to `dual_t
 
 ## Files
 
-- `dual_trait_guard_recompute.py` — unified recomputation script
+- `dual_trait_guard_recompute.py` — unified recomputation script (identical guards for both traits)
 - `dual_trait_guards.json` — computed guard values for both traits
+- `pcos/fetch_p1a.py`, `pcos/analyse_p1a.py` — PCOS (case 1) fetch and QC pipeline
+- `t2d/t2a_fetch.py`, `t2d/t2a_analyse_local.py` — T2D (case 2) fetch and QC pipeline
 - `README.md` — this file
+- `LICENSE` — MIT
 
 ## License
 
