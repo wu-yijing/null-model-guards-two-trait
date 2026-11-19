@@ -1,0 +1,52 @@
+{
+  "note": "Both traits computed with identical guard definitions from raw deposited CSVs; no manuscript numbers reused.",
+  "gws_threshold": 5e-08,
+  "PCOS_case1": {
+    "trait": "polycystic ovary syndrome",
+    "n_lead_assoc_used": 128,
+    "n_studies_with_leads": 18,
+    "G1_power_confounding": {
+      "rho_all": 0.766,
+      "n_studies_all": 15,
+      "rho_gws_only": 0.429,
+      "n_studies_gws": 15,
+      "n_studies_with_case_count": 15
+    },
+    "G2_threshold_artefact": {
+      "n_assoc_with_p": 128,
+      "n_p_gt_5e8": 52,
+      "pct_p_gt_5e8": 40.6
+    },
+    "G3_cross_study_concordance": {
+      "n_studies_ge2_loci": 15,
+      "n_pairwise": 105,
+      "mean_jaccard": 0.0207,
+      "n_pairs_zero_shared": 88,
+      "pct_pairs_zero_shared": 83.8
+    }
+  },
+  "T2D_case2": {
+    "trait": "type 2 diabetes mellitus",
+    "n_lead_assoc_used": 9410,
+    "n_studies_with_leads": 235,
+    "G1_power_confounding": {
+      "rho_all": 0.29,
+      "n_studies_all": 186,
+      "rho_gws_only": 0.441,
+      "n_studies_gws": 175,
+      "n_studies_with_case_count": 186
+    },
+    "G2_threshold_artefact": {
+      "n_assoc_with_p": 9410,
+      "n_p_gt_5e8": 1252,
+      "pct_p_gt_5e8": 13.3
+    },
+    "G3_cross_study_concordance": {
+      "n_studies_ge2_loci": 188,
+      "n_pairwise": 17578,
+      "mean_jaccard": 0.0075,
+      "n_pairs_zero_shared": 14567,
+      "pct_pairs_zero_shared": 82.9
+    }
+  }
+}
